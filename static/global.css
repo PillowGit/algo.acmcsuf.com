@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700');
+
+:root {
+  --bg-color: #212121;
+  --algo-purple: #5f52d1;
+  --contrast-color: #f7f0f5;
+  --complement1: #decbb7;
+  --complement2: #8f857d;
+}
+
+html, body, #svelte {
+  background-color: var(--bg-color);
+  color: var(--contrast-color);
+  font-family: 'Poppins', 'Verdana', 'Helvetica', sans-serif;
+  font-display: fallback;
+}

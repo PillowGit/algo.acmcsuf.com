@@ -34,6 +34,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"cjs": "^0.0.11"
+		"cjs": "^0.0.11",
+		"monaco-editor": "^0.48.0"
 	}
 }

@@ -1,3 +1,4 @@
+import { initVimMode } from 'monaco-vim';
 import * as monaco from 'monaco-editor';
 
 import editorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker';
@@ -28,4 +29,4 @@ self.MonacoEnvironment = {
     }
 };
 
-export default monaco;
+export default { monaco: monaco, initVimMode: initVimMode };

@@ -5,7 +5,7 @@
 <div class="page-content">
   <img src="icons/algo-logo.svg" alt="algo-logo" class="main-algo-logo"/>
   <div class="code-editor-holder">
-    <CodeEditor />
+    <CodeEditor language="python" theme="Monokai"/>
   </div>
 </div>
 

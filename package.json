@@ -35,6 +35,7 @@
 	"type": "module",
 	"dependencies": {
 		"cjs": "^0.0.11",
-		"monaco-editor": "^0.48.0"
+		"monaco-editor": "^0.48.0",
+		"monaco-vim": "^0.4.1"
 	}
 }

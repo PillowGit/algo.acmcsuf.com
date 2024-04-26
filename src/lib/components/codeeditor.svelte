@@ -1,4 +1,8 @@
 <script lang="ts">
+  export let language: string = "python";
+  export let theme: string = "Monokai";
+  const themes: string[] = ["Monokai"];
+
   import { onDestroy, onMount } from "svelte";
 
   // Monaco deps and declarations
@@ -6,13 +10,36 @@
   let editor: Monaco.editor.IStandaloneCodeEditor;
   let monaco: typeof Monaco;
   let editorContainer: HTMLElement;
+  let vimMode: any;
 
   onMount(async () => {
     // Import monaco
-    monaco = (await import('$lib/monaco')).default;
+    const imports = (await import('$lib/monaco')).default;
+    monaco = imports.monaco;
+    // Import all themes
+    for (let i = 0; i < themes.length; i++) {
+      const theme_ = themes[i];
+      await fetch(`/themes/${theme_}.json`)
+        .then((response) => response.json())
+        .then((data) => {
+          monaco.editor.defineTheme(theme_, data);
+        });
+    }
+    if (!theme || !themes.includes(theme)) {
+      theme = themes[0];
+    }
+    // Set theme on editor creation
+    monaco.editor.onDidCreateEditor((_) => {
+      monaco.editor.setTheme(theme);
+    });
+    // Create editor & model to be displayed
     const editor = monaco.editor.create(editorContainer);
-    const model = monaco.editor.createModel("print(\"Hello World!\")", "python");
+    const model = monaco.editor.createModel("print(\"Hello, World!\")", language);
     editor.setModel(model);
+    // Initialize vim mode
+    imports.initVimMode(editor, document.getElementById("status-bar"));
+    // Focus
+    editor.focus();
   });
 
   onDestroy(() => {
@@ -22,6 +49,7 @@
 </script>
 
 <div class="editor" bind:this={editorContainer}></div>
+<p id="status-bar"></p>
 
 <style>
   .editor {

@@ -37,13 +37,14 @@
     const model = monaco.editor.createModel("print(\"Hello, World!\")", language);
     editor.setModel(model);
     // Initialize vim mode
-    imports.initVimMode(editor, document.getElementById("status-bar"));
+    vimMode = imports.initVimMode(editor, document.getElementById("status-bar")); // UNCOMMENT ME FOR VIM
     // Focus
     editor.focus();
   });
 
   onDestroy(() => {
     monaco?.editor.getModels().forEach((model) => model.dispose());
+    if (vimMode) vimMode.dispose();
     editor?.dispose();
   });
 </script>

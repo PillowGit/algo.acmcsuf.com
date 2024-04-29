@@ -80,6 +80,14 @@
         display: flex;
         justify-content: center;
     }
+    .title-text {
+        font-size: 3rem;
+    }
+    @media only screen and (max-width: 600px) {
+        .title-text {
+          font-size: 1rem;
+        }
+    }
     .gradient-border {
         z-index: 14;
         position: fixed;

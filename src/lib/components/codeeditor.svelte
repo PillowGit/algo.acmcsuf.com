@@ -10,13 +10,13 @@
   let editor: Monaco.editor.IStandaloneCodeEditor;
   let monaco: typeof Monaco;
   let editorContainer: HTMLElement;
-  let vimMode: any;
+  //let vimMode: any; // UNCOMMENT ME FOR VIM
 
   onMount(async () => {
-    // Import monaco
+    // Import monaco code editor
     const imports = (await import('$lib/monaco')).default;
     monaco = imports.monaco;
-    // Import all themes
+    // Import all themes stored in static/themes
     for (let i = 0; i < themes.length; i++) {
       const theme_ = themes[i];
       await fetch(`/themes/${theme_}.json`)
@@ -28,7 +28,7 @@
     if (!theme || !themes.includes(theme)) {
       theme = themes[0];
     }
-    // Set theme on editor creation
+    // Set editor creation event to set theme
     monaco.editor.onDidCreateEditor((_) => {
       monaco.editor.setTheme(theme);
     });

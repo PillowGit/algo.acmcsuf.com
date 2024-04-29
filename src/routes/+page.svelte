@@ -6,6 +6,7 @@
   }
 </script>
 
+<title>ACM Algo at CSUF</title>
 {#each j as _}
   <div class="top-section">
     <h1 class="top-section-text title-text">

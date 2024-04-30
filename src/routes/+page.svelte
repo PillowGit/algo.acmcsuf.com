@@ -10,7 +10,7 @@
 {#each j as _}
   <div class="top-section">
     <h1 class="top-section-text title-text">
-      Money don't come fast but <span style="color: var(--algo-purple);">i do</span> 🔥🔥🔥🗣️🤞<br>-Matt
+      Make shit <span style="color: var(--algo-purple);"><b>happen.</b></span>
     </h1>
     <img src="/icons/algo-logo.svg" alt="algo logo" class="top-section-icon"/>
   </div>

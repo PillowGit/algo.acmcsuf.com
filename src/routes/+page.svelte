@@ -10,7 +10,7 @@
 {#each j as _}
   <div class="top-section">
     <h1 class="top-section-text title-text">
-      Now imagine a sick ass <span style="color: var(--algo-purple);">algo quote</span> right here, that'd go hard
+      Money don't come fast but <span style="color: var(--algo-purple);">i do</span> 🔥🔥🔥🗣️🤞<br>-Matt
     </h1>
     <img src="/icons/algo-logo.svg" alt="algo logo" class="top-section-icon"/>
   </div>

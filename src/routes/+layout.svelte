@@ -4,7 +4,7 @@
   import "../tail.css"; 
 </script>
 
-<Navbar github="https://avatars.githubusercontent.com/u/104609738?v=4" />
+<Navbar github="" />
 <div class="page">
   <div class="page-content">
     <slot />

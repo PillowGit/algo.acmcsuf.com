@@ -34,6 +34,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@supabase/ssr": "^0.3.0",
 		"@supabase/supabase-js": "^2.43.0",
 		"cjs": "^0.0.11",
 		"monaco-editor": "^0.48.0",

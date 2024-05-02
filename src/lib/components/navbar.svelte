@@ -1,6 +1,9 @@
 <script lang="ts">
 	// Input props
 	export let github: string | null = null;
+
+	// Define sign in shit
+	export let data;
 </script>
 
 <div class="gradient-border"></div>
@@ -15,7 +18,7 @@
 		<div class="right-nav">
 			{#if github}
 				<img src={github} alt="Your Github Avatar" class="github-pfp" />
-			{/if}
+			{:else}{/if}
 		</div>
 	</div>
 </div>

@@ -1,20 +1,22 @@
 <script lang="ts">
 	// Input props
 	export let github: string | null = null;
-
-	// Define sign in shit
-	export let data;
 </script>
 
+<!-- Color gradient outline thing -->
 <div class="gradient-border"></div>
+<!-- Container for everything -->
 <div class="navbar-container">
+	<!-- Defines actual width: changes with screen width for mobile compatability -->
 	<div class="nav-width">
+		<!-- Left elements -->
 		<div class="left-nav">
 			<a href="https://acmcsuf.com" target="_blank" class="acm-badge">
 				<img src="/icons/general-logo.svg" alt="ACM Logo" />
 				<h3>at <b>CSUF</b></h3>
 			</a>
 		</div>
+		<!-- Right elements -->
 		<div class="right-nav">
 			{#if github}
 				<img src={github} alt="Your Github Avatar" class="github-pfp" />
@@ -55,13 +57,21 @@
 		height: 100%;
 		width: 50%;
 	}
+	/* Styling the github pfp specifically */
 	.github-pfp {
-		height: 70%;
+		height: 60%;
 		aspect-ratio: 1 / 1;
 		margin-left: 3%;
 		margin-right: 3%;
 		border-radius: 50%;
 		border: color-mix(in srgb, var(--algo-purple) 80%, transparent) solid 2px;
+		transition: 0.2s;
+	}
+	.github-pfp:hover {
+		transform: scale(1.05);
+		-webkit-filter: drop-shadow(0px 0px 5px var(--algo-purple));
+		filter: drop-shadow(0px 0px 5px var(--algo-purple));
+		cursor: pointer;
 	}
 	/* Actually contains the navbar elements */
 	.nav-width {

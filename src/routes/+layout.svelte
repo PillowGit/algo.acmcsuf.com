@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 
 	// Import components
-	import Navbar from '$lib/components/navbar.svelte';
+	import Navbar from '$lib/components/navbar/navbar.svelte';
 	import Footer from '$lib/components/footer.svelte';
 	import '../tail.css';
 
@@ -16,7 +16,9 @@
 	onMount(async () => {
 		const userdata = await supabase.auth.getUser();
 		if (!userdata) return;
-		github_display = userdata.data.user.user_metadata.avatar_url;
+		else {
+			github_display = userdata.data.user.user_metadata.avatar_url;
+		}
 	});
 </script>
 

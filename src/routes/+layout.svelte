@@ -1,4 +1,8 @@
 <script lang="ts">
+	// All icons used in this site are from here:
+	// https://svgrepo.com/collection/iconhub-glyph-icons/
+
+	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 
 	// Import components
@@ -14,15 +18,29 @@
 	let github_display = '';
 
 	onMount(async () => {
-		const userdata = await supabase.auth.getUser();
+		const userdata: any = await supabase.auth.getUser();
 		if (!userdata) return;
 		else {
 			github_display = userdata.data.user.user_metadata.avatar_url;
 		}
 	});
+	async function logout() {
+		if (window.confirm('Logout?')) {
+			await supabase.auth.signOut();
+			location.reload();
+		}
+	}
+	async function login() {
+		await supabase.auth.signInWithOAuth({
+			provider: 'github',
+			options: {
+				redirectTo: $page.url.toString()
+			}
+		});
+	}
 </script>
 
-<Navbar github={github_display} />
+<Navbar github={github_display} logout_function={logout} login_function={login} />
 <div class="page">
 	<div class="page-content">
 		<slot />

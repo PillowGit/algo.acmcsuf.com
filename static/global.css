@@ -8,9 +8,12 @@
   --complement2: #8f857d;
 }
 
-html, body, #svelte {
+html,
+body,
+#svelte {
   background-color: var(--bg-color);
   color: var(--contrast-color);
   font-family: 'Poppins', 'Verdana', 'Helvetica', sans-serif;
   font-display: fallback;
+  transition: 0.2s;
 }

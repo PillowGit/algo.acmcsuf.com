@@ -4,6 +4,12 @@
 		text: string;
 		location: string;
 	}
+
+	// Input props
+	export let github: string | null = null;
+	export let username: string | null = null;
+	export let logout_function: () => void = () => {};
+	export let login_function: () => void = () => {};
 	export let NavItems: Redirects[] = [];
 
 	let dropdown_open: boolean = false;
@@ -41,14 +47,41 @@
 	></div>
 	<div class="dropdown" class:active={dropdown_open}>
 		<div class="dropdown-item-space"></div>
-		{#each NavItems.entries() as [i, item]}
+		{#each NavItems.entries() as [_, item]}
 			<h3 class="section-choice" class:active={$page.url.pathname === item.location.toLowerCase()}>
 				<a href={item.location}>{item.text}</a>
 			</h3>
-			{#if i !== NavItems.length - 1}
-				<div class="divider"></div>
-			{/if}
+			<div class="divider"></div>
 		{/each}
+		{#if github}
+			<div
+				title="Logout"
+				on:click={logout_function}
+				on:keydown={(e) => {
+					if (e.key === 'Enter') logout_function();
+				}}
+				tabindex="0"
+				aria-pressed="false"
+				role="button"
+			>
+				<h3 class="section-choice">
+					Signed in as <span style="color: var(--algo-purple);">{username}</span>. Click to logout.
+				</h3>
+			</div>
+		{:else}
+			<div
+				title="Login with GitHub"
+				on:click={login_function}
+				on:keydown={(e) => {
+					if (e.key === 'Enter') login_function();
+				}}
+				tabindex="0"
+				aria-pressed="false"
+				role="button"
+			>
+				<h3 class="section-choice">Login</h3>
+			</div>
+		{/if}
 		<div class="dropdown-item-space"></div>
 	</div>
 </div>
@@ -56,7 +89,10 @@
 <style>
 	/* Style Dropdown Elements */
 	.section-choice {
-		font-size: clamp(1rem, 1.5rem, 1.75rem);
+		font-size: clamp(1rem, 1.45rem, 1.75rem);
+		text-align: center;
+		text-wrap: evenly;
+		transition: 0.2s;
 	}
 	.section-choice.active {
 		color: color-mix(in srgb, var(--algo-purple) 80%, white 20%);
@@ -98,7 +134,7 @@
 		opacity: 0;
 		pointer-events: none;
 		display: flex;
-		flex-direction: column;
+		flex-direction: column-reverse;
 		align-items: center;
 		justify-content: center;
 	}

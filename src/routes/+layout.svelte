@@ -16,11 +16,13 @@
 	$: ({ supabase } = data);
 
 	let github_display = '';
+	let github_username = '';
 
 	onMount(async () => {
 		const userdata: any = await supabase.auth.getUser();
 		if (!userdata) return;
 		else {
+			github_username = userdata.data.user.user_metadata.user_name;
 			github_display = userdata.data.user.user_metadata.avatar_url;
 		}
 	});
@@ -40,7 +42,12 @@
 	}
 </script>
 
-<Navbar github={github_display} logout_function={logout} login_function={login} />
+<Navbar
+	github={github_display}
+	username={github_username}
+	logout_function={logout}
+	login_function={login}
+/>
 <div class="page">
 	<div class="page-content">
 		<slot />

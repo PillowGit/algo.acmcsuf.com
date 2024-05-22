@@ -3,6 +3,7 @@
 
 	// Input props
 	export let github: string | null = null;
+	export let username: string | null = null;
 	export let logout_function: () => void = () => {};
 	export let login_function: () => void = () => {};
 
@@ -73,7 +74,7 @@
 			{/if}
 		</div>
 		<div class="dropdown-holder">
-			<Dropdown {NavItems} />
+			<Dropdown {NavItems} {github} {login_function} {logout_function} {username} />
 		</div>
 	</div>
 </div>

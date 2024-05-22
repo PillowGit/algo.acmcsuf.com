@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	interface Redirects {
 		text: string;
 		location: string;
@@ -39,34 +40,73 @@
 		role="button"
 	></div>
 	<div class="dropdown" class:active={dropdown_open}>
-		{#each NavItems as { text, location }}
-			<h3>{text}</h3>
+		<div class="dropdown-item-space"></div>
+		{#each NavItems.entries() as [i, item]}
+			<h3 class="section-choice" class:active={$page.url.pathname === item.location.toLowerCase()}>
+				<a href={item.location}>{item.text}</a>
+			</h3>
+			{#if i !== NavItems.length - 1}
+				<div class="divider"></div>
+			{/if}
 		{/each}
+		<div class="dropdown-item-space"></div>
 	</div>
 </div>
 
 <style>
-	/* Style button for dropdown */
-	.button-holder {
-		height: 37.5%;
-		width: 100%;
-		aspect-ratio: 1 / 1;
-		margin-right: 5%;
-		border: 1px solid red;
-		flex-direction: row;
+	/* Style Dropdown Elements */
+	.section-choice {
+		font-size: clamp(1rem, 1.5rem, 1.75rem);
 	}
-	.button-click {
-		height: 100%;
-		margin-left: auto;
-		aspect-ratio: 1 / 1;
-		z-index: 20;
+	.section-choice.active {
+		color: color-mix(in srgb, var(--algo-purple) 80%, white 20%);
+		color: var(--algo-purple);
+		text-decoration: underline;
 	}
-	.dropdown-button {
-		height: 100%;
-		aspect-ratio: 1 / 1;
-		object-fit: cover;
-		-webkit-filter: invert(1);
-		filter: invert(1);
+	.section-choice:hover {
+		color: color-mix(in srgb, var(--algo-purple) 80%, white 20%);
+		transform: scale(1.05);
+		cursor: pointer;
+	}
+
+	.divider {
+		margin-top: 1vh;
+		margin-bottom: 1vh;
+		height: 0.2vh;
+		width: 60%;
+		background-color: color-mix(in srgb, var(--complement2) 60%, transparent 40%);
+		border-radius: 50%;
+	}
+
+	.dropdown-item-space {
+		padding-top: 2vh;
+		padding-bottom: 2vh;
+		width: 5vw;
+	}
+	/* Dropdown menu */
+	.dropdown {
+		position: fixed;
+		top: 0;
+		left: 0;
+		background-color: color-mix(in srgb, var(--bg-color) 95%, white 5%);
+		border-bottom: var(--complement2) 0.3vh solid;
+		width: 100vw;
+		min-height: 13vh;
+		transition: 0.4s;
+		z-index: -1;
+		visibility: hidden;
+		opacity: 0;
+		pointer-events: none;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+	.dropdown.active {
+		z-index: 21;
+		visibility: visible;
+		opacity: 1;
+		pointer-events: all;
 	}
 	/* Screen unfocus effect */
 	.dropdown-bg {
@@ -88,28 +128,25 @@
 		opacity: 1;
 		pointer-events: all;
 	}
-	/* Dropdown menu */
-	.dropdown {
-		position: fixed;
-		top: 0;
-		left: 0;
-		background-color: color-mix(in srgb, var(--bg-color) 95%, white 5%);
-		border-bottom: var(--complement2) 0.3vh solid;
-		width: 100vw;
-		height: 0;
-		transition: 0.4s;
-		z-index: -1;
-		visibility: hidden;
-		opacity: 0;
-		pointer-events: none;
-		display: flex;
-		flex-direction: column;
+	/* Style button for dropdown */
+	.button-holder {
+		height: 37.5%;
+		width: 100%;
+		aspect-ratio: 1 / 1;
+		margin-right: 5%;
+		flex-direction: row;
 	}
-	.dropdown.active {
-		min-height: 13vh;
-		z-index: 21;
-		visibility: visible;
-		opacity: 1;
-		pointer-events: all;
+	.button-click {
+		height: 100%;
+		margin-left: auto;
+		aspect-ratio: 1 / 1;
+		z-index: 20;
+	}
+	.dropdown-button {
+		height: 100%;
+		aspect-ratio: 1 / 1;
+		object-fit: cover;
+		-webkit-filter: invert(1);
+		filter: invert(1);
 	}
 </style>
